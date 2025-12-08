@@ -1,0 +1,90 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "OSCAL SSP to Word Converter";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .container { max-width: 800px; margin-top: 50px; }
+        .upload-area {
+            border: 2px dashed #ccc;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .upload-area:hover { border-color: #007bff; }
+        .progress { height: 25px; }
+        .alert { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">OSCAL SSP to Word Converter</h1>
+        <p class="text-center text-muted mb-4">
+            Convert OSCAL System Security Plans (XML) to FedRAMP Word Documents
+        </p>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" id="uploadForm">
+                    <div class="upload-area">
+                        <h4>Upload OSCAL SSP XML File</h4>
+                        <p class="text-muted">Supports LOW, MODERATE, and HIGH baseline SSPs</p>
+                        <input type="file" class="form-control" name="UploadedFile" accept=".xml" required />
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Convert to Word Document
+                        </button>
+                    </div>
+                </form>
+
+                @if (!string.IsNullOrEmpty(Model.StatusMessage))
+                {
+                    <div class="alert @(Model.Success ? "alert-success" : "alert-danger") mt-4">
+                        @Model.StatusMessage
+                    </div>
+                }
+
+                @if (Model.Success && !string.IsNullOrEmpty(Model.DownloadUrl))
+                {
+                    <div class="text-center mt-4">
+                        <a href="@Model.DownloadUrl" class="btn btn-success btn-lg" download>
+                            Download Word Document
+                        </a>
+                        <p class="text-muted mt-2">
+                            Baseline: @Model.Baseline
+                        </p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h5>Supported Features:</h5>
+            <ul>
+                <li>OSCAL Version 1.0.0 System Security Plans</li>
+                <li>FedRAMP LOW, MODERATE, and HIGH baselines</li>
+                <li>Automatic metadata mapping</li>
+                <li>Security control checkbox population</li>
+            </ul>
+        </div>
+
+        <footer class="text-center text-muted mt-5">
+            <p>OSCAL SSP to Word Converter - Modernized for .NET 9</p>
+            <p><small>Original by VITG, INC. / Volpe Group | Updated 2025</small></p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

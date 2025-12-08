@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system-security-plan xmlns="http://csrc.nist.gov/ns/oscal/1.0"
+    uuid="test-ssp-001">
+    <metadata>
+        <title>Test System Security Plan</title>
+        <published>2024-01-15T00:00:00Z</published>
+        <last-modified>2024-06-01T12:00:00Z</last-modified>
+        <version>1.0.0</version>
+        <oscal-version>1.0.0</oscal-version>
+        <role id="system-owner">
+            <title>System Owner</title>
+        </role>
+        <role id="authorizing-official">
+            <title>Authorizing Official</title>
+        </role>
+        <party uuid="party-001" type="organization">
+            <name>Test Organization</name>
+            <short-name>TestOrg</short-name>
+            <address>
+                <addr-line>123 Test Street</addr-line>
+                <city>Test City</city>
+                <state>TS</state>
+                <postal-code>12345</postal-code>
+                <country>US</country>
+            </address>
+        </party>
+        <party uuid="party-002" type="person">
+            <name>John Doe</name>
+            <email-address>john.doe@example.com</email-address>
+        </party>
+        <responsible-party role-id="system-owner">
+            <party-uuid>party-002</party-uuid>
+        </responsible-party>
+    </metadata>
+    <system-characteristics>
+        <system-id identifier-type="https://fedramp.gov">test-system-001</system-id>
+        <system-name>Test Information System</system-name>
+        <system-name-short>TIS</system-name-short>
+        <description>
+            <p>This is a test system for unit testing purposes.</p>
+        </description>
+        <security-sensitivity-level>moderate</security-sensitivity-level>
+        <system-information>
+            <information-type uuid="info-type-001">
+                <title>Test Information Type</title>
+                <description>
+                    <p>Test information type description.</p>
+                </description>
+                <categorization system="https://doi.org/10.6028/NIST.SP.800-60v2r1">
+                    <information-type-id>C.2.4.1</information-type-id>
+                </categorization>
+                <confidentiality-impact>
+                    <base>moderate</base>
+                </confidentiality-impact>
+                <integrity-impact>
+                    <base>moderate</base>
+                </integrity-impact>
+                <availability-impact>
+                    <base>low</base>
+                </availability-impact>
+            </information-type>
+        </system-information>
+        <security-impact-level>
+            <security-objective-confidentiality>moderate</security-objective-confidentiality>
+            <security-objective-integrity>moderate</security-objective-integrity>
+            <security-objective-availability>low</security-objective-availability>
+        </security-impact-level>
+        <status state="operational"/>
+        <authorization-boundary>
+            <description>
+                <p>The authorization boundary includes all system components.</p>
+            </description>
+        </authorization-boundary>
+    </system-characteristics>
+    <system-implementation>
+        <user uuid="user-001">
+            <title>System Administrator</title>
+            <role-id>system-admin</role-id>
+        </user>
+        <component uuid="component-001" type="software">
+            <title>Web Application</title>
+            <description>
+                <p>Main web application component.</p>
+            </description>
+            <status state="operational"/>
+        </component>
+    </system-implementation>
+    <control-implementation>
+        <description>
+            <p>Control implementation for the test system.</p>
+        </description>
+        <implemented-requirement uuid="impl-001" control-id="ac-1">
+            <prop name="implementation-status" value="implemented"/>
+            <prop name="control-origination" value="service-provider-corporate"/>
+            <responsible-role role-id="system-owner">
+                <party-uuid>party-002</party-uuid>
+            </responsible-role>
+            <statement statement-id="ac-1_smt.a" uuid="stmt-001">
+                <description>
+                    <p>The organization develops, documents, and disseminates access control policy.</p>
+                </description>
+            </statement>
+            <statement statement-id="ac-1_smt.b" uuid="stmt-002">
+                <description>
+                    <p>The organization reviews and updates the access control policy annually.</p>
+                </description>
+            </statement>
+        </implemented-requirement>
+        <implemented-requirement uuid="impl-002" control-id="ac-2">
+            <prop name="implementation-status" value="partially-implemented"/>
+            <prop name="control-origination" value="service-provider-system-specific"/>
+            <responsible-role role-id="system-owner">
+                <party-uuid>party-002</party-uuid>
+            </responsible-role>
+            <set-parameter param-id="ac-2_prm_1">
+                <value>30 days</value>
+            </set-parameter>
+            <statement statement-id="ac-2_smt.a" uuid="stmt-003">
+                <description>
+                    <p>The organization identifies and selects account types for the information system.</p>
+                </description>
+            </statement>
+        </implemented-requirement>
+        <implemented-requirement uuid="impl-003" control-id="ac-3">
+            <prop name="implementation-status" value="planned"/>
+            <prop name="control-origination" value="inherited"/>
+            <responsible-role role-id="authorizing-official">
+                <party-uuid>party-002</party-uuid>
+            </responsible-role>
+            <responsible-role role-id="system-owner">
+                <party-uuid>party-002</party-uuid>
+            </responsible-role>
+        </implemented-requirement>
+    </control-implementation>
+</system-security-plan>
